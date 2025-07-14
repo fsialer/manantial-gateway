@@ -1,0 +1,38 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: manantial-gateway
+
+  jackson:
+    default-property-inclusion: NON_NULL
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: customer-service
+              uri: ${CUSTOMER_URL:http://localhost:8080/v1/customers}
+              predicates:
+                - Path=/api/v1/customers/**
+              filters:
+                - StripPrefix=1
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_SERVER:http://localhost:9000/realms/manantial-realm}
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: spring-gateway-client
+#            client-secret: ${KEYCLOAK_SECRET:XNiMGILonLtwhgLVLok4igt66Lbf6ZDs}
+#            authorization-grant-type: authorization_code
+#            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+#            scope: openid, profile, email
+#        provider:
+#          keycloak:
+#            issuer-uri: ${AUTH_SERVER:http://localhost:9000/realms/manantial-realm}
