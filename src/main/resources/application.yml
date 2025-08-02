@@ -13,8 +13,15 @@ spring:
       server:
         webflux:
           routes:
+
+            - id: customer-service-swagger
+              uri: ${CUSTOMER_BASEURL:http://localhost:8081}
+              predicates:
+                - Path=/api/v1/customers/swagger-ui.html, /api/v1/customers/swagger-ui/**, /api/v1/customers/v3/api-docs
+              filters:
+                - RewritePath=/api/v1/customers/(?<segment>.*), /${segment}
             - id: customer-service
-              uri: ${CUSTOMER_URL:http://localhost:8080/v1/customers}
+              uri: ${CUSTOMER_URL:http://localhost:8081/v1/customers}
               predicates:
                 - Path=/api/v1/customers/**
               filters:

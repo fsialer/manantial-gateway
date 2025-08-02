@@ -26,6 +26,11 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeExchange(auth -> auth
                         .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .pathMatchers(
+                                "/api/v1/customers/swagger-ui.html",
+                                "/api/v1/customers/swagger-ui/**",
+                                "/api/v1/customers/v3/api-docs"
+                        ).permitAll()
                         .pathMatchers(HttpMethod.GET,
                                 "/api/v1/customers/**"
                         ).hasAnyAuthority("user","admin")
