@@ -43,3 +43,18 @@ spring:
 #        provider:
 #          keycloak:
 #            issuer-uri: ${AUTH_SERVER:http://localhost:9000/realms/manantial-realm}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, info, prometheus
+    endpoint:
+      prometheus:
+        enabled: true
+    metrics:
+      enable:
+        jvm: true
+        logback: true
+      export:
+        prometheus:
+          enabled: true
