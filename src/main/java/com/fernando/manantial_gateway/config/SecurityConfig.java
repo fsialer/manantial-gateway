@@ -29,7 +29,8 @@ public class SecurityConfig {
                         .pathMatchers(
                                 "/api/v1/customers/swagger-ui.html",
                                 "/api/v1/customers/swagger-ui/**",
-                                "/api/v1/customers/v3/api-docs"
+                                "/api/v1/customers/v3/api-docs",
+                                "/actuator/**"
                         ).permitAll()
                         .pathMatchers(HttpMethod.GET,
                                 "/api/v1/customers/**"
