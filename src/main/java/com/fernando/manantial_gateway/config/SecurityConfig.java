@@ -35,7 +35,11 @@ public class SecurityConfig {
                         .pathMatchers(HttpMethod.GET,
                                 "/api/v1/customers/**"
                         ).hasAnyAuthority("user","admin")
-                        .pathMatchers(HttpMethod.POST, "/api/v1/customers").hasAuthority("admin")
+                        .pathMatchers(HttpMethod.DELETE,
+                                "/api/v1/customers/{id}"
+                        ).hasAnyAuthority("admin")
+                        .pathMatchers(HttpMethod.PUT, "/api/v1/customers/{id}").hasAnyAuthority("admin","user")
+                        .pathMatchers(HttpMethod.POST, "/api/v1/customers").hasAnyAuthority("admin","user")
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2->oauth2.jwt(jwtSpec -> jwtSpec.jwtAuthenticationConverter(jwtAuthenticationConverter)))
                 .build();
