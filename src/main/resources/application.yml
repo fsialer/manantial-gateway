@@ -24,6 +24,8 @@ spring:
               uri: ${CUSTOMER_URL:http://localhost:8081/v1/customers}
               predicates:
                 - Path=/api/v1/customers/**
+              filters:
+                - StripPrefix=1
             - id: consumer-service
               uri: ${CONSUMER_URL:http://localhost:8099/v1/consumer}
               predicates:
