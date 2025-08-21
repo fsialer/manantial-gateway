@@ -33,7 +33,8 @@ public class SecurityConfig {
                                 "/actuator/**"
                         ).permitAll()
                         .pathMatchers(HttpMethod.GET,
-                                "/api/v1/customers/**"
+                                "/api/v1/customers/**",
+                                "/api/v1/consumer/**"
                         ).hasAnyAuthority("user","admin")
                         .pathMatchers(HttpMethod.DELETE,
                                 "/api/v1/customers/{id}"
